@@ -3,8 +3,20 @@
 const Process = require('./process');
 
 class Traceroute extends Process {
-    constructor(sendwait = 0) {
-        super('traceroute', ['-q', 1, '-z', sendwait, '-n']);
+    constructor(sendwait = 0,port = 80,proto='icmp') {
+        let protoPram = '-I'
+        switch (proto) {
+            case 'tcp':
+                protoPram = '-T'
+                break;
+            case 'udp':
+                protoPram = '-U'
+                break;
+            case 'icmp':
+                protoPram = '-I'
+                break;
+        }
+        super('traceroute', ['-q', 1, '-z', sendwait, '-n',protoPram,'-p',port]);
     }
 
     parseDestination(data) {

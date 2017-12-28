@@ -3,7 +3,7 @@
 const Traceroute = require('./index');
 
 try {
-    const tracer = new Traceroute();
+    const tracer = new Traceroute(0,80,'tcp');
     tracer
         .on('pid', (pid) => {
             console.log(`pid: ${pid}`);
@@ -16,9 +16,12 @@ try {
         })
         .on('close', (code) => {
             console.log(`close: code ${code}`);
-        });
+        })
+        .on('end',(output)=>{
+            console.log(output)
+        })
 
-    tracer.trace('github.com');
+    tracer.trace('42.33.53.23');
 } catch (ex) {
     console.log(ex);
 }

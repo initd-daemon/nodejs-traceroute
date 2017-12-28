@@ -1,9 +1,5 @@
-# nodejs-traceroute [![Code Climate](https://codeclimate.com/github/zulhilmizainuddin/nodejs-traceroute/badges/gpa.svg)](https://codeclimate.com/github/zulhilmizainuddin/nodejs-traceroute)
-
-[![NPM](https://nodei.co/npm/nodejs-traceroute.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nodejs-traceroute/)
-
-Node.js wrapper around tracert and traceroute process
-
+# nodejs-traceroute
+Node.js wrapper around traceroute process
 ## Install
 
     npm install --save nodejs-traceroute

@@ -8,7 +8,10 @@ const validator = require('validator');
 class Process extends events.EventEmitter {
     constructor(command, args) {
         super();
-
+        this.output = {
+            destination:null,
+            hops:[],
+        };
         this.command = command;
         this.args = args;
     }
@@ -22,6 +25,9 @@ class Process extends events.EventEmitter {
 
         const process = spawn(this.command, this.args);
         process.on('close', (code) => {
+            if(code == 0){
+                this.emit('end',this.output)                
+            }
             this.emit('close', code);
         });
 
@@ -37,6 +43,7 @@ class Process extends events.EventEmitter {
                     if (!isDestinationCaptured) {
                         const destination = this.parseDestination(line);
                         if (destination !== null) {
+                            this.output.destination = destination;
                             this.emit('destination', destination);
 
                             isDestinationCaptured = true;
@@ -45,6 +52,7 @@ class Process extends events.EventEmitter {
 
                     const hop = this.parseHop(line);
                     if (hop !== null) {
+                        this.output.hops.push(hop)
                         this.emit('hop', hop);
                     }
                 });
